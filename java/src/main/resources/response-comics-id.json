@@ -1,0 +1,21 @@
+{
+  "title": "My Comic #1",
+  "series": "My Comic Series #1",
+  "image": "http://i.annihil.us/u/prod/marvel/i/mg/1/f0/61ae1ebb78eab.jpg",
+  "source": "MARVEL",
+  "sourceId": "98301",
+  "_links": {
+    "self": {
+      "href": "http://localhost:8080/comics/1"
+    },
+    "comic": {
+      "href": "http://localhost:8080/comics/1"
+    },
+    "creators": {
+      "href": "http://localhost:8080/comics/1/creators"
+    },
+    "characters": {
+      "href": "http://localhost:8080/comics/1/characters"
+    }
+  }
+}

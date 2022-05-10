@@ -1,5 +1,6 @@
 #!/bin/bash
 BASEDIR=$(dirname $0)
+export PGPASSWORD='postgres1'
 DATABASE=final_capstone
 psql -U postgres -f "$BASEDIR/dropdb.sql" &&
 createdb -U postgres $DATABASE &&

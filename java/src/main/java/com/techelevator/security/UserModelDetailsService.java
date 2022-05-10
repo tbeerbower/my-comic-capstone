@@ -1,8 +1,8 @@
 package com.techelevator.security;
 
 
-import com.techelevator.dao.UserDao;
 import com.techelevator.model.User;
+import com.techelevator.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;
@@ -22,17 +22,17 @@ public class UserModelDetailsService implements UserDetailsService {
 
     private final Logger log = LoggerFactory.getLogger(UserModelDetailsService.class);
 
-    private final UserDao userDao;
+    private final UserRepository repository;
 
-    public UserModelDetailsService(UserDao userDao) {
-        this.userDao = userDao;
+    public UserModelDetailsService(UserRepository repository) {
+        this.repository = repository;
     }
 
     @Override
     public UserDetails loadUserByUsername(final String login) {
         log.debug("Authenticating user '{}'", login);
         String lowercaseLogin = login.toLowerCase();
-        return createSpringSecurityUser(lowercaseLogin, userDao.findByUsername(lowercaseLogin));
+        return createSpringSecurityUser(lowercaseLogin, repository.findByUsername(lowercaseLogin));
     }
 
     private org.springframework.security.core.userdetails.User createSpringSecurityUser(String lowercaseLogin, User user) {

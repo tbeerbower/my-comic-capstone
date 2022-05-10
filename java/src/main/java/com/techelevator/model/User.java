@@ -1,28 +1,67 @@
 package com.techelevator.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.data.domain.AbstractAggregateRoot;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Transient;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public class User {
-
+@Entity(name="users")
+public class User extends AbstractAggregateRoot {
+   @Id
+   @Column(
+       name = "user_id", updatable = false
+   )
+   @SequenceGenerator(
+       name = "seq_user_id",
+       sequenceName = "seq_user_id",
+       allocationSize = 1
+   )
+   @GeneratedValue(
+       strategy = GenerationType.SEQUENCE,
+       generator = "seq_user_id"
+   )
    private Long id;
    private String username;
    @JsonIgnore
+   @Column(name="password_hash")
    private String password;
    @JsonIgnore
+   @Transient
    private boolean activated;
+   @Transient
    private Set<Authority> authorities = new HashSet<>();
 
-   public User() { }
+   private String role;
+
+   @JsonIgnore
+   @OneToMany(mappedBy = "user")
+   private Set<Collection> collections;
+
+   public User() {
+      setActivated(true);
+      setAuthorities("USER");
+   }
 
    public User(Long id, String username, String password, String authorities) {
       this.id = id;
       this.username = username;
       this.password = password;
       this.activated = true;
+   }
+
+   public User registerCreationEvent() {
+      registerEvent(new CreationEvent());
+      return this;
    }
 
    public Long getId() {
@@ -98,5 +137,11 @@ public class User {
               ", activated=" + activated +
               ", authorities=" + authorities +
               '}';
+   }
+
+   public class CreationEvent {
+      public User getUser() {
+         return User.this;
+      }
    }
 }

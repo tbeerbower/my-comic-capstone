@@ -1,0 +1,62 @@
+{
+  "_embedded": {
+    "comics": [
+      {
+        "title": "My Comic #1",
+        "series": "My Comic Series #1",
+        "image": "http://i.annihil.us/u/prod/marvel/i/mg/1/f0/61ae1ebb78eab.jpg",
+        "source": "MARVEL",
+        "sourceId": "98301",
+        "_links": {
+          "self": {
+            "href": "http://localhost:8080/comics/1"
+          },
+          "comic": {
+            "href": "http://localhost:8080/comics/1"
+          },
+          "creators": {
+            "href": "http://localhost:8080/comics/1/creators"
+          },
+          "characters": {
+            "href": "http://localhost:8080/comics/1/characters"
+          }
+        }
+      },
+      {
+        "title": "My Comic #2",
+        "series": "My Comic Series #1",
+        "image": "http://i.annihil.us/u/prod/marvel/i/mg/1/f0/61ae1ebb78eab.jpg",
+        "source": "MARVEL",
+        "sourceId": "98301",
+        "_links": {
+          "self": {
+            "href": "http://localhost:8080/comics/2"
+          },
+          "comic": {
+            "href": "http://localhost:8080/comics/2"
+          },
+          "creators": {
+            "href": "http://localhost:8080/comics/2/creators"
+          },
+          "characters": {
+            "href": "http://localhost:8080/comics/2/characters"
+          }
+        }
+      }
+    ]
+  },
+  "_links": {
+    "self": {
+      "href": "http://localhost:8080/comics"
+    },
+    "profile": {
+      "href": "http://localhost:8080/profile/comics"
+    }
+  },
+  "page": {
+    "size": 20,
+    "totalElements": 2,
+    "totalPages": 1,
+    "number": 0
+  }
+}
